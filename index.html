@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳轉中 - 國家永續發展獎</title>
+    <!-- 引入 Tailwind CSS 以便快速且美觀地排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 載入中點點的閃爍動畫 */
+        .dot {
+            animation: blink 1.4s infinite both;
+        }
+        .dot:nth-child(1) { animation-delay: 0.2s; }
+        .dot:nth-child(2) { animation-delay: 0.4s; }
+        .dot:nth-child(3) { animation-delay: 0.6s; }
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen font-sans">
+
+    <!-- 中間的白色卡片區塊 -->
+    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-sm w-full mx-4 text-center transform transition-all hover:scale-105 duration-300">
+        
+        <!-- 顯示指定的圖片，檔名對應您上傳的圖檔 -->
+        <img src="國家永續發展獎LOGO(JPG).jpg" alt="國家永續發展獎 LOGO" class="w-48 h-auto mx-auto mb-6 object-contain">
+
+        <!-- 跳轉提示文字 -->
+        <h2 class="text-2xl font-bold text-gray-800 flex items-center justify-center mb-2">
+            跳轉中請稍後
+            <span class="flex ml-1">
+                <span class="dot">.</span>
+                <span class="dot">.</span>
+                <span class="dot">.</span>
+            </span>
+        </h2>
+        
+        <!-- 倒數計時提示 -->
+        <p class="text-gray-500 text-sm mb-6">
+            將於 <span id="countdown" class="font-bold text-blue-600 text-lg">3</span> 秒後進入目標網站
+        </p>
+
+        <!-- 萬一瀏覽器阻擋自動跳轉的備用連結 -->
+        <p class="text-xs text-gray-400">
+            如果沒有自動跳轉，請 <a href="https://pse.is/selfreduction" class="text-blue-500 hover:text-blue-700 underline transition-colors">點擊這裡</a>。
+        </p>
+    </div>
+
+    <script>
+        // 設定目標網址 (有圖片版本對應的網址)
+        const targetUrl = "https://pse.is/offshorewindpower";
+        
+        // 設定倒數秒數
+        let timeLeft = 3;
+        const countdownElement = document.getElementById('countdown');
+
+        // 每 1 秒 (1000 毫秒) 執行一次的計時器
+        const timer = setInterval(() => {
+            timeLeft -= 1;
+            countdownElement.textContent = timeLeft;
+
+            // 當時間到 0 秒時
+            if (timeLeft <= 0) {
+                clearInterval(timer); // 停止計時器
+                window.location.href = targetUrl; // 執行網頁跳轉
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
